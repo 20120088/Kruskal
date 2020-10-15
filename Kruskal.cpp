@@ -53,7 +53,7 @@ int getRoot(int u) {
 
 void doUnion(int u, int v) {
 	int t = root[u] + root[v];
-	if (root[u] > root[v]) {
+	if (root[u] > root[v]) {//đỉnh nào có ít đỉnh con hơn thì thành con của đỉnh kia
 		root[u] = v;
 		root[v] = t;
 	}
@@ -66,12 +66,12 @@ void doUnion(int u, int v) {
 void kruskal() {
 	int t = 0, ru, rv;
 	for (int i = 1; i <= m; i++) {
-		ru = getRoot(canh[i].u);
+		ru = getRoot(canh[i].u);//lấy đỉnh gốc 
 		rv = getRoot(canh[i].v);
-		if (ru != rv) {
+		if (ru != rv) {//nếu đỉnh gốc khác nhau thì thêm cạnh i vào cây khung
 			doUnion(ru, rv);
 			t += canh[i].c;
-			canh[i].connected = true;
+			canh[i].connected = true;//đánh dấu thêm đỉnh vào cây khung
 		}
 	}
 	std::cout << t << std::endl;
@@ -87,7 +87,7 @@ int main() {
 
 	docf();
 	init();
-	quicksort(1, m);
+	quicksort(1, m);//sắp xếp các cạnh theo trọng số
 	kruskal();
 
 	return 0;
